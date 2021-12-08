@@ -95,7 +95,18 @@ class UserController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user', 'token'), 201);
+        return response()->json([
+            'id' => $user->id,
+            'name' => $user->id,
+            'last_name' => $user->id,
+            'phone' => $user->id,
+            'eps' => $user->id,
+            'identification' => $user->id,
+            'birthdate' => $user->id,
+            'email' => $user->id, 
+            'role' => $user->roles[0]['name'], 
+            'token' => $token, 
+        ], 201);
     }
 
     public function logout() {
