@@ -97,13 +97,13 @@ class UserController extends Controller
 
         return response()->json([
             'id' => $user->id,
-            'name' => $user->id,
-            'last_name' => $user->id,
-            'phone' => $user->id,
-            'eps' => $user->id,
-            'identification' => $user->id,
-            'birthdate' => $user->id,
-            'email' => $user->id, 
+            'name' => $user->name,
+            'last_name' => $user->last_name,
+            'phone' => $user->phone,
+            'eps' => $user->eps,
+            'identification' => $user->identification,
+            'birthdate' => $user->birthdate,
+            'email' => $user->email, 
             'role' => $user->roles[0]['name'], 
             'token' => $token, 
         ], 201);
