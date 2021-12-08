@@ -49,7 +49,18 @@ class UserController extends Controller
             'phone' => auth()->user()->phone,
             'role' => auth()->user()->roles[0]['name']
         ];
-        return response()->json(compact('user'));
+        return response()->json([
+            'id' => auth()->user()->id,
+            'name' => auth()->user()->name,
+            'last_name' => auth()->user()->last_name,
+            'email' => auth()->user()->email,
+            'eps' => auth()->user()->eps,
+            'identification' => auth()->user()->identification,
+            'birthdate' => auth()->user()->birthdate,
+            'phone' => auth()->user()->phone,
+            'role' => auth()->user()->roles[0]['name']
+        ], 200);
+        // return response()->json(compact('user'));
     }
 
 
