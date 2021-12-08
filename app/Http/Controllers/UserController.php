@@ -38,17 +38,17 @@ class UserController extends Controller
         } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
             return response()->json(['token_absent'], $e->getStatusCode());
         }
-        $user = [
-            'id' => auth()->user()->id,
-            'name' => auth()->user()->name,
-            'last_name' => auth()->user()->last_name,
-            'email' => auth()->user()->email,
-            'eps' => auth()->user()->eps,
-            'identification' => auth()->user()->identification,
-            'birthdate' => auth()->user()->birthdate,
-            'phone' => auth()->user()->phone,
-            'role' => auth()->user()->roles[0]['name']
-        ];
+        // $user = [
+        //     'id' => auth()->user()->id,
+        //     'name' => auth()->user()->name,
+        //     'last_name' => auth()->user()->last_name,
+        //     'email' => auth()->user()->email,
+        //     'eps' => auth()->user()->eps,
+        //     'identification' => auth()->user()->identification,
+        //     'birthdate' => auth()->user()->birthdate,
+        //     'phone' => auth()->user()->phone,
+        //     'role' => auth()->user()->roles[0]['name']
+        // ];
         return response()->json([
             'id' => auth()->user()->id,
             'name' => auth()->user()->name,
@@ -59,7 +59,7 @@ class UserController extends Controller
             'birthdate' => auth()->user()->birthdate,
             'phone' => auth()->user()->phone,
             'role' => auth()->user()->roles[0]['name']
-        ], 200);
+        ]);
         // return response()->json(compact('user'));
     }
 
