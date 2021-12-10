@@ -87,7 +87,7 @@ class UserController extends Controller
         //     'phone' => auth()->user()->phone,
         //     'role' => auth()->user()->roles[0]['name']
         // ];
-        $token = JWTAuth::fromUser($user);
+        $token = JWTAuth::parseToken()->authenticate();
         return response()->json($token, 200);
         // return response()->json([
         //     'id' => auth()->user()->id,
