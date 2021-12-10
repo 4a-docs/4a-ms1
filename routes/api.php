@@ -25,5 +25,6 @@ Route::post('login', [UserController::class, 'authenticate']);
 Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::get('user', [UserController::class, 'getAuthenticatedUser']);
+    Route::get('token-user', [UserController::class, 'getTokenAuthenticatedUser']);
 
 });

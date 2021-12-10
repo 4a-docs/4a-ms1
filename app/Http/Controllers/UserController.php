@@ -63,6 +63,46 @@ class UserController extends Controller
         // return response()->json(compact('user'));
     }
 
+    public function getTokenAuthenticatedUser()
+    {
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['token_expired'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['token_invalid'], $e->getStatusCode());
+        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['token_absent'], $e->getStatusCode());
+        }
+        // $user = [
+        //     'id' => auth()->user()->id,
+        //     'name' => auth()->user()->name,
+        //     'last_name' => auth()->user()->last_name,
+        //     'email' => auth()->user()->email,
+        //     'eps' => auth()->user()->eps,
+        //     'identification' => auth()->user()->identification,
+        //     'birthdate' => auth()->user()->birthdate,
+        //     'phone' => auth()->user()->phone,
+        //     'role' => auth()->user()->roles[0]['name']
+        // ];
+        $token = JWTAuth::fromUser($user);
+        return response()->json($token, 200);
+        // return response()->json([
+        //     'id' => auth()->user()->id,
+        //     'name' => auth()->user()->name,
+        //     'last_name' => auth()->user()->last_name,
+        //     'email' => auth()->user()->email,
+        //     'eps' => auth()->user()->eps,
+        //     'identification' => auth()->user()->identification,
+        //     'birthdate' => auth()->user()->birthdate,
+        //     'phone' => auth()->user()->phone,
+        //     'role' => auth()->user()->roles[0]['name']
+        // ]);
+        // return response()->json(compact('user'));
+    }
+
 
     public function register(Request $request)
     {
