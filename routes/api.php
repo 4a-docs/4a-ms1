@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'authenticate']);
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+// Route::group(['middleware' => ['jwt.verify']], function() {
 
     Route::get('user/{user}', [UserController::class, 'getAuthenticatedUser']);
-    Route::get('token-user', [UserController::class, 'getTokenAuthenticatedUser']);
+    // Route::get('token-user', [UserController::class, 'getTokenAuthenticatedUser']);
 
-});
+// });
