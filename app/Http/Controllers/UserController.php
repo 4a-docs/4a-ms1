@@ -25,7 +25,7 @@ class UserController extends Controller
         return response()->json(compact('token'));
     }
 
-    public function getAuthenticatedUser()
+    public function getAuthenticatedUser(User $user)
     {
         try {
             if (!$user = JWTAuth::parseToken()->authenticate()) {
@@ -50,15 +50,15 @@ class UserController extends Controller
         //     'role' => auth()->user()->roles[0]['name']
         // ];
         return response()->json([
-            'id' => auth()->user()->id,
-            'name' => auth()->user()->name,
-            'last_name' => auth()->user()->last_name,
-            'email' => auth()->user()->email,
-            'eps' => auth()->user()->eps,
-            'identification' => auth()->user()->identification,
-            'birthdate' => auth()->user()->birthdate,
-            'phone' => auth()->user()->phone,
-            'role' => auth()->user()->roles[0]['name']
+            'id' => $user->id,
+            'name' => $user->name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+            'eps' => $user->eps,
+            'identification' => $user->identification,
+            'birthdate' => $user->birthdate,
+            'phone' => $user->phone,
+            'role' => $user->roles[0]['name']
         ]);
         // return response()->json(compact('user'));
     }
