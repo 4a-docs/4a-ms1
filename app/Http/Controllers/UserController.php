@@ -77,8 +77,8 @@ class UserController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
         }
         $token = JWTAuth::parseToken()->authenticate();
-        $user = User::where('id', '=', $token['id'])->get();
-        $role = $user->getRoleNames();
+        // $user = User::where('id', '=', $token['id'])->get();
+        $role = $token->getRoleNames();
         // $token->append(['role'=> $user->roles[0]['name']]);
         return response()->json($role, 200);
         // return response()->json($token, 200);
