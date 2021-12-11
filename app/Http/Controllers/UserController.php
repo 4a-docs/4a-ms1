@@ -80,6 +80,9 @@ class UserController extends Controller
         $role = $token->getRoleNames();
         $user = [
             'id' => $token->id,
+            'name' => $token->name,
+            'last_name' => $token->last_name,
+            'email' => $token->email,
             'role' => $token->roles[0]['name']
         ];
         // $token->append($role);
