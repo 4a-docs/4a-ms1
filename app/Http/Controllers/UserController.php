@@ -25,7 +25,7 @@ class UserController extends Controller
         $user = JWTAuth::parseToken()->authenticate();
         $data = [
             'id' => $user->id,
-            'token' => $user
+            // 'token' => $user
         ];
         return response()->json($data, 200);
         // return response()->json(compact('token'));
