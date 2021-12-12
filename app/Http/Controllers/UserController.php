@@ -22,33 +22,17 @@ class UserController extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-        return response()->json(compact('token'));
+        $user = JWTAuth::parseToken()->authenticate();
+        $data = [
+            'id' => $user->id,
+            'token' => $user
+        ];
+        return response()->json($data, 200);
+        // return response()->json(compact('token'));
     }
 
     public function getAuthenticatedUser(User $user)
     {
-        // try {
-        //     if (!$user = JWTAuth::parseToken()->authenticate()) {
-        //         return response()->json(['user_not_found'], 404);
-        //     }
-        // } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-        //     return response()->json(['token_expired'], $e->getStatusCode());
-        // } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-        //     return response()->json(['token_invalid'], $e->getStatusCode());
-        // } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-        //     return response()->json(['token_absent'], $e->getStatusCode());
-        // }
-        // $user = [
-        //     'id' => auth()->user()->id,
-        //     'name' => auth()->user()->name,
-        //     'last_name' => auth()->user()->last_name,
-        //     'email' => auth()->user()->email,
-        //     'eps' => auth()->user()->eps,
-        //     'identification' => auth()->user()->identification,
-        //     'birthdate' => auth()->user()->birthdate,
-        //     'phone' => auth()->user()->phone,
-        //     'role' => auth()->user()->roles[0]['name']
-        // ];
         return response()->json([
             'id' => $user->id,
             'name' => $user->name,
@@ -85,9 +69,7 @@ class UserController extends Controller
             'email' => $token->email,
             'role' => $token->roles[0]['name']
         ];
-        // $token->append($role);
         return response()->json($user, 200);
-        // return response()->json($token, 200);
     }
 
 
