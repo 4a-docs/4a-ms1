@@ -22,9 +22,11 @@ class UserController extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-        $user = JWTAuth::parseToken()->authenticate();
+
+        // $user = JWTAuth::parseToken()->authenticate();
+        $user = JWTAuth::attempt($credentials);
         $data = [
-            'id' => $user->id,
+            'token' => $user,
             // 'token' => $user
         ];
         return response()->json($data, 200);
